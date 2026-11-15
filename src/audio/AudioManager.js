@@ -137,7 +137,7 @@ export class AudioManager {
     }
 
     playBackgroundMusic(volume = 0.4) {
-        const version = new URL(import.meta.url).searchParams.get('v') || Date.now();
+        const version = new URL(import.meta.url).searchParams.get('v') || '20261115';
         const path = `${CONFIG.ASSETS.AUDIO_DIR}background_music.m4a?v=${version}`;
         this._switchMusic(path, 'bg', 'world');
     }
@@ -145,7 +145,7 @@ export class AudioManager {
     playRegionalTheme(regionId) {
         const fileName = CONFIG.REGION_AUDIO_OVERRIDE[regionId] || `${regionId}.m4a`;
         // CACHE BUSTING FOR AUDIO
-        const version = new URL(import.meta.url).searchParams.get('v') || Date.now();
+        const version = new URL(import.meta.url).searchParams.get('v') || '20261115';
         const path = `${CONFIG.ASSETS.AUDIO_DIR}${fileName}?v=${version}`;
         this._switchMusic(path, 'region', regionId);
     }

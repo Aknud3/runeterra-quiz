@@ -1,6 +1,6 @@
 /* League Of Legends Legacy Cursor - http://www.rw-designer.com/cursor-detail/134125 */
 * {
-    cursor: url('http://www.rw-designer.com/cursor-extern.php?id=134125'), auto !important;
+    cursor: url('../assets/img/lol-cursor.cur'), auto !important;
 }
 
 :root {
