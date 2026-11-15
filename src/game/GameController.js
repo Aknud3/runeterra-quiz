@@ -197,45 +197,17 @@ export class GameController {
                 cat = "FALLBACK";
             }
         } else {
-            // === NORMÁLNÍ DOBÝVÁNÍ - použij standardní otázky ===
-            const regionId = marker.dataset.regionid || marker.dataset.region || (marker.closest('.region-label')?.dataset.regionId) || null;
-            let region = null;
-            if (regionId && this.mapManager.regions) {
-                region = this.mapManager.regions.find(r => r.id === regionId);
-            }
-            // Fallback: pokus o určení regionu podle indexu
-            if (!region && this.mapManager.regions) {
-                const rIdx = Math.floor(index / 10);
-                region = this.mapManager.regions[rIdx];
-            }
-
-            let pool = this.mapManager.questions.filter(q => {
-                if (!region) return false;
-                return q.region && q.region.toLowerCase() === region.id.toLowerCase() && q.points >= pts - 100 && q.points <= pts + 100;
-            });
-
-            // Pokud pool prázdný, fallback na všechny otázky v regionu
-            if (pool.length === 0 && region) {
-                pool = this.mapManager.questions.filter(q => q.region && q.region.toLowerCase() === region.id.toLowerCase());
-            }
-
-            // VŽDY použít náhodnou otázku z poolu (pokud existuje)
-            if (pool.length > 0) {
-                const randomQ = pool[Math.floor(Math.random() * pool.length)];
-                q = randomQ.question;
-                a = randomQ.answer;
-                cat = randomQ.category;
-            } else {
-                // Fallback na data z markeru
-                q = marker.dataset.q || "";
-                a = marker.dataset.a || "";
-                cat = marker.dataset.category || "";
-            }
+            // === NORMÁLNÍ DOBÝVÁNÍ - vždy přesně otázka přiřazená markeru ===
+            // Žádný náhodný výběr z okolních bodů: jinak se může znovu objevit
+            // už zodpovězená otázka nebo otázka z jiné pozice.
+            q = marker.dataset.q || "";
+            a = marker.dataset.a || "";
+            cat = marker.dataset.category || "";
         }
 
         // Při útoku použij uložené body (včetně double), jinak původní
         const finalPoints = isAttackAttempt ? (this.gameState.conqueredPoints?.[index] || pts) : pts;
-        this.openQuestion(marker, q, a, finalPoints, cat, isAttackAttempt, isBlacklisted);
+        this.openQuestion(marker, q, a, finalPoints, cat, isAttackAttempt);
     }
 
     refreshUsedMarkers() {
@@ -398,10 +370,10 @@ export class GameController {
         }
     }
 
-    openQuestion(marker, q, a, pts, cat, isAttack = false, isBlacklisted = false) {
+    openQuestion(marker, q, a, pts, cat, isAttack = false) {
         const index = parseInt(marker.dataset.index);
         this.activeCell = marker;
-        this.savedQuestion = { q, a, pts, cat, isAttack };
+        this.savedQuestion = { q, a, pts, cat, isAttack, index };
         this.isRevealed = false;
         this.uiManager.resetModalUI();
         this.uiManager.showModal();
@@ -413,30 +385,35 @@ export class GameController {
             return;
         }
 
-        // 2. Check for Double Risk - pouze pro neobsazená pole
-        if (!isAttack && this.gameState.doubleCells.has(index)) {
+        // 2. Double Risk: i pro černé (neobsazené) pole, ne pro obsazená cizí pole.
+        // Obsazené pole se přebírá útokem za uložené body, tam se double znovu nepočítá.
+        if (!this.gameState.conqueredBy[index] && this.gameState.doubleCells.has(index)) {
             this.uiManager.elements.questionText.innerHTML = `
                 <div class="q-category">DOUBLE RISK</div>
                 <div class="q-content">Chceš hrát o ${pts * 2} bodů?</div>
             `;
             this.uiManager.elements.doubleRiskButtons.style.display = 'flex';
+            if (isAttack) this._renderAttackWarning(index, pts);
         } else {
             this.confirmDouble(false);
         }
+    }
 
-        // 3. Zobrazit upozornění na útok, pokud jde o cizí pole
-        if (isAttack) {
-            const attackWarning = document.createElement('div');
-            attackWarning.className = 'attack-warning';
-            attackWarning.textContent = isBlacklisted
-                ? `Dobýváš černé pole za ${pts} bodů`
-                : `Dobýváš pole týmu ${this.gameState.conqueredBy[index]}`;
-            
-            // Vložit před otázku
-            const questionText = this.uiManager.elements.questionText;
-            if (questionText) {
-                questionText.insertBefore(attackWarning, questionText.firstChild);
-            }
+    _renderAttackWarning(index, pts) {
+        const attackWarning = document.createElement('div');
+        attackWarning.className = 'attack-warning';
+
+        const ownerId = this.gameState.conqueredBy[index];
+        if (ownerId) {
+            const ownerName = this.gameState.teamData[ownerId - 1]?.name || `č. ${ownerId}`;
+            attackWarning.textContent = `Dobýváš pole týmu ${ownerName}`;
+        } else {
+            attackWarning.textContent = `Dobýváš černé pole za ${pts} bodů`;
+        }
+
+        const questionText = this.uiManager.elements.questionText;
+        if (questionText) {
+            questionText.insertBefore(attackWarning, questionText.firstChild);
         }
     }
 
@@ -444,6 +421,9 @@ export class GameController {
         this.currentPoints = isDouble ? this.savedQuestion.pts * 2 : this.savedQuestion.pts;
         this.uiManager.elements.doubleRiskButtons.style.display = 'none';
         this.uiManager.setQuestion(this.savedQuestion.q, this.savedQuestion.cat);
+        if (this.savedQuestion.isAttack) {
+            this._renderAttackWarning(this.savedQuestion.index, this.savedQuestion.pts);
+        }
         if (isDouble) {
             const content = this.uiManager.elements.questionText.querySelector('.q-content');
             content.innerHTML = "DOUBLE: " + content.innerHTML;

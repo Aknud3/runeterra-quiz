@@ -34,6 +34,7 @@ export class GameState {
             this.activeTeamId = 1;
             this.usedCells.clear();
             this.conqueredBy = {};
+            this.conqueredPoints = {};
             this.blacklistedCells.clear();
             // Výpočet kol: 50 / počet týmů + 3
             this.maxRounds = Math.floor(50 / this.teamCount) + 3;
@@ -89,6 +90,11 @@ export class GameState {
             this.doubleCells = new Set(state.doubleIndexes || []);
             this.goldCells = new Set(state.goldIndexes || []);
             this.blacklistedCells = new Set(state.blacklistedCells || []);
+            // Starší save mohl mít jako blacklisted i obsazené pole po neúspěšném útoku.
+            // Takové pole zůstává vlastníkovi, takže blacklist zahodíme.
+            for (const idx of Array.from(this.blacklistedCells)) {
+                if (this.conqueredBy[idx]) this.blacklistedCells.delete(idx);
+            }
             this.currentRound = state.currentRound || 1;
             
             // Výpočet kol pokud nejsou uloženy (pro zpětnou kompatibilitu)
@@ -186,8 +192,14 @@ export class GameState {
     }
 
     blacklist(markerIndex) {
-        this.blacklistedCells.add(markerIndex);
         this.usedCells.add(markerIndex);
+        // Neúspěšný útok nesmí obarvit cizí pole jako černé.
+        // Pokud pole vlastníka má, zůstává mu i s body; jen se znovu zpřístupní útok.
+        if (this.conqueredBy[markerIndex]) {
+            this.blacklistedCells.delete(markerIndex);
+        } else {
+            this.blacklistedCells.add(markerIndex);
+        }
         this.save();
     }
 
@@ -253,7 +265,7 @@ export class GameState {
 
     isGameOver(totalCells) {
         // Konec hry když jsou všechny buňky použity NEBO když jsou vyčerpána kola
-        const cellsDone = this.usedCells.size === totalCells && totalCells > 0;
+        const cellsDone = totalCells > 0 && this.usedCells.size >= totalCells;
         const roundsDone = this.currentRound > this.maxRounds;
         return cellsDone || roundsDone;
     }
