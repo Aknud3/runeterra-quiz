@@ -1,0 +1,122 @@
+/* Region Splash Screen Overlay */
+#region-splash {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000; /* Above everything including onboarding */
+    background: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: visibility 1s;
+}
+
+#region-splash.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Background Layers */
+#region-splash-bg,
+#region-splash-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+}
+
+#region-splash-bg {
+    background-size: cover;
+    background-position: center;
+    animation: splashKenBurns 30s infinite alternate ease-in-out;
+}
+
+#region-splash-video {
+    display: none;
+}
+
+#region-splash-video.active {
+    display: block;
+}
+
+#region-splash::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, transparent 20%, rgba(0, 0, 0, 0.6) 80%);
+    pointer-events: none;
+    z-index: 2;
+}
+
+/* Content & Typography */
+#region-splash-content {
+    position: relative;
+    z-index: 3;
+    text-align: center;
+    width: 100%;
+}
+
+#region-splash-name {
+    font-size: 6rem;
+    font-weight: 900;
+    color: var(--accent-gold);
+    text-shadow: 0 0 30px rgba(0, 0, 0, 0.8), 0 0 10px rgba(200, 155, 60, 0.4);
+    letter-spacing: 15px;
+    text-transform: uppercase;
+    margin: 0;
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                opacity 0.6s ease-out, 
+                letter-spacing 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#region-splash.revealed #region-splash-name {
+    transform: scale(1);
+    opacity: 1;
+    letter-spacing: 25px;
+}
+
+.region-splash-separator {
+    width: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent, var(--accent-gold), transparent);
+    margin: 20px auto 0;
+    transition: width 1.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#region-splash.revealed .region-splash-separator {
+    width: 400px;
+}
+
+@keyframes splashKenBurns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    #region-splash-name {
+        font-size: 3rem;
+        letter-spacing: 5px;
+    }
+    #region-splash.revealed #region-splash-name {
+        letter-spacing: 8px;
+    }
+    .region-splash-separator {
+        width: 0;
+    }
+    #region-splash.revealed .region-splash-separator {
+        width: 80%;
+    }
+}

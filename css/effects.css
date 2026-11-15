@@ -1,0 +1,440 @@
+.region-effects-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 5;
+    overflow: hidden;
+}
+
+.region-effect {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 5;
+    transition: opacity 0.8s ease-in-out;
+}
+
+.region-effect.active {
+    opacity: 1;
+}
+
+@keyframes fall {
+    0% {
+        transform: translateY(-15vh) translateX(0);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(115vh) translateX(30px);
+        opacity: 0;
+    }
+}
+
+/* Freljord Snow - Make it bigger and more visible with frosty ice tint */
+.freljord-snow {
+    background: radial-gradient(circle at 50% 50%, rgba(174, 234, 252, 0.15), rgba(200, 240, 255, 0.05));
+}
+
+.freljord-snow .snowflake {
+    position: absolute;
+    top: -15px;
+    width: 8px;
+    height: 8px;
+    background: white;
+    border-radius: 50%;
+    filter: blur(1px);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
+    animation: fall linear infinite;
+}
+
+/* Demacia Rays - Stronger gold */
+.demacia-rays {
+    background: radial-gradient(circle at 50% -20%, rgba(255, 215, 0, 0.4), transparent 75%);
+}
+
+.demacia-rays .sun-flare {
+    position: absolute;
+    top: -150%;
+    left: -150%;
+    width: 400%;
+    height: 400%;
+    background: conic-gradient(from 0deg,
+            transparent 0deg,
+            rgba(255, 255, 255, 0.08) 2deg,
+            transparent 15deg,
+            rgba(255, 255, 255, 0.05) 20deg,
+            transparent 35deg);
+    animation: rotate 60s linear infinite;
+    filter: blur(2px);
+}
+
+/* Shadow Isles Mist - Spectral mist + Clouds */
+.shadow-isles-mist {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 60, 50, 0.2);
+    box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.7);
+    z-index: 5;
+}
+
+.black-mist-cloud {
+    position: absolute;
+    background: radial-gradient(circle, rgba(0, 150, 120, 0.4) 0%, transparent 80%);
+    filter: blur(40px);
+    border-radius: 50%;
+    will-change: transform;
+    pointer-events: none;
+    opacity: 0.8;
+}
+
+@keyframes mist-roll-rtl {
+    from {
+        transform: translateX(120vw);
+    }
+
+    to {
+        transform: translateX(-120vw);
+    }
+}
+
+/* Noxus Embers - Deep Night Atmosphere */
+.noxus-embers {
+    background: rgba(0, 0, 0, 0.50) !important;
+    box-shadow: inset 0 0 150px rgba(139, 0, 0, 0.5);
+    display: block !important;
+}
+
+.noxus-embers .ember {
+    position: absolute;
+    bottom: -20px;
+    background: #ff4d00;
+    box-shadow: 0 0 12px #ff4655, 0 0 5px #fffc00;
+    border-radius: 50%;
+    animation: rise linear infinite;
+    opacity: 0.9;
+}
+
+/* Ionia Petals - Spiritual tint + petals */
+.ionia-petals {
+    background: radial-gradient(circle at 50% 50%, rgba(255, 128, 171, 0.1), rgba(156, 39, 176, 0.05));
+}
+
+.ionia-petals .petal {
+    position: absolute;
+    top: -15px;
+    width: 10px;
+    height: 14px;
+    background: #ff80ab;
+    border-radius: 50% 0 50% 0;
+    box-shadow: 0 0 5px rgba(255, 128, 171, 0.5);
+    animation: fall-rotate linear infinite;
+}
+
+/* Shurima Haze - More aggressive heat shimmer */
+.shurima-haze {
+    background: radial-gradient(circle at 50% 50%, rgba(255, 120, 0, 0.15), rgba(255, 200, 0, 0.1));
+    overflow: hidden;
+}
+
+.heat-wave {
+    position: absolute;
+    background: radial-gradient(ellipse at center, rgba(255, 180, 0, 0.4), transparent 80%);
+    filter: blur(20px);
+    border-radius: 50%;
+    pointer-events: none;
+    will-change: transform, opacity;
+    animation: shimmer-rise-aggressive linear infinite;
+}
+
+@keyframes shimmer-rise-aggressive {
+    0% {
+        transform: translateY(0) scaleX(1) skewX(0deg);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.7;
+    }
+
+    40% {
+        transform: translateY(-80px) scaleX(1.3) skewX(15deg);
+        opacity: 0.9;
+    }
+
+    70% {
+        transform: translateY(-160px) scaleX(1.5) skewX(-15deg);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translateY(-250px) scaleX(1.7) skewX(15deg);
+        opacity: 0;
+    }
+}
+
+/* Bilgewater Rain - Multi-dimensional Depth */
+.bilgewater-rain {
+    background: linear-gradient(180deg, rgba(0, 30, 40, 0.4), rgba(0, 207, 188, 0.1));
+}
+
+.bilgewater-rain .drop {
+    position: absolute;
+    top: -50px;
+    background: rgba(0, 255, 230, 0.6);
+    box-shadow: 0 0 5px rgba(0, 255, 230, 0.4);
+    animation: drip linear infinite;
+}
+
+.drop-back {
+    width: 1px;
+    height: 20px;
+    opacity: 0.3;
+    filter: blur(2px);
+}
+
+.drop-mid {
+    width: 1px;
+    height: 40px;
+    opacity: 0.6;
+    filter: blur(1px);
+}
+
+.drop-front {
+    width: 2px;
+    height: 65px;
+    opacity: 0.9;
+    filter: none;
+    box-shadow: 0 0 10px rgba(0, 255, 230, 0.8);
+}
+
+/* Piltover & Zaun - Dual Layer Effect */
+.pilt-zaun-combined {
+    background: linear-gradient(to bottom, rgba(0, 246, 255, 0.15) 0%, transparent 40%, transparent 60%, rgba(57, 255, 20, 0.20) 100%);
+}
+
+/* Zaun Toxic Fog (Bottom) */
+.zaun-fog-particle {
+    position: absolute;
+    background: radial-gradient(circle, rgba(57, 255, 20, 0.6) 0%, transparent 70%);
+    border-radius: 50%;
+    filter: blur(20px);
+    animation: drift-fog linear infinite;
+    pointer-events: none;
+}
+
+/* Piltover Hextech Orbs (Top) - Replacement for low-budget bolts */
+.pilt-hextech-orb {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: #00f6ff;
+    border-radius: 50%;
+    box-shadow: 0 0 15px #00f6ff, 0 0 30px rgba(0, 246, 255, 0.8), 0 0 45px rgba(0, 246, 255, 0.4);
+    opacity: 0;
+    animation: hextech-orb-pulse 3s ease-in-out infinite;
+}
+
+@keyframes drift-fog {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.7;
+    }
+
+    80% {
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: translate(60px, -30px) scale(1.3);
+        opacity: 0;
+    }
+}
+
+@keyframes hextech-orb-pulse {
+
+    0%,
+    100% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* Targon Aurora - Stronger gradients + Mountain Wind */
+.targon-aurora {
+    background: linear-gradient(180deg, rgba(138, 154, 214, 0.3), transparent);
+    overflow: hidden;
+}
+
+.wind-streak {
+    position: absolute;
+    height: 1px;
+    background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.3), transparent);
+    filter: blur(1px);
+    pointer-events: none;
+    animation: wind-move linear infinite;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+
+@keyframes wind-move {
+    0% {
+        transform: translateX(0) translateY(0) rotate(inherit) scaleX(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 0.4;
+    }
+
+    80% {
+        opacity: 0.4;
+    }
+
+    100% {
+        transform: translateX(400px) translateY(40px) rotate(inherit) scaleX(1.2);
+        opacity: 0;
+    }
+}
+
+/* Ixtal Leaves - Darker green with jungle tint */
+.ixtal-leaves {
+    background: radial-gradient(circle at 50% 50%, rgba(26, 138, 61, 0.15), rgba(0, 50, 20, 0.1));
+}
+
+.ixtal-leaves .leaf {
+    position: absolute;
+    top: -15px;
+    width: 12px;
+    height: 12px;
+    background: #1a8a3d;
+    border-radius: 80% 0 55% 0;
+    animation: fall-rotate 5s linear infinite;
+}
+
+/* Void Glitch - Calm deep void energy */
+.void-glitch {
+    background: radial-gradient(circle, transparent 20%, rgba(30, 0, 40, 0.8) 100%);
+    animation: void-shift 15s ease-in-out infinite;
+}
+
+/* ANIMATIONS */
+@keyframes shimmer {
+    0% {
+        transform: translate(0, 0);
+        opacity: 0.8;
+    }
+
+    50% {
+        transform: translate(0.5px, -0.5px);
+        opacity: 0.9;
+    }
+
+    100% {
+        transform: translate(-0.5px, 0.5px);
+        opacity: 0.8;
+    }
+}
+
+@keyframes drip {
+    0% {
+        transform: translateY(-50px);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+    }
+
+    80% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(110vh);
+        opacity: 0;
+    }
+}
+
+@keyframes rise {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 1;
+    }
+
+    90% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-100vh) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes fall-rotate {
+    0% {
+        transform: translateY(-15vh) rotate(0deg);
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(115vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+@keyframes void-shift {
+
+    0%,
+    100% {
+        background-color: rgba(138, 43, 226, 0.3);
+    }
+
+    33% {
+        background-color: rgba(75, 0, 130, 0.4);
+    }
+
+    66% {
+        background-color: rgba(158, 59, 181, 0.3);
+    }
+}

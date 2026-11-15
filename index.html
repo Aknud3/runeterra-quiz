@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="cs">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Souboj o Runeteru</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css?v=attack-warning-clean-v6">
+    <link rel="stylesheet" href="css/map.css?v=blacklisted-hover-v9">
+    <link rel="stylesheet" href="css/effects.css?v=v_ionia_filter_v5">
+    <link rel="stylesheet" href="css/clouds.css?v=v_ionia_filter_v5">
+    <link rel="stylesheet" href="css/region-splash.css?v=v_ionia_filter_v5">
+
+    <!-- Favicons & Manifest -->
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="manifest" href="manifest.json">
+    <link rel="shortcut icon" href="assets/img/favicon.ico">
+</head>
+
+<body>
+
+    <div id="onboarding-screen">
+        <div id="onboarding-bg"></div>
+        <div class="onboarding-content">
+            <img src="assets/img/logo.png" alt="Logo" class="onboarding-logo">
+            <h1>SOUBOJ O RUNETERRU</h1>
+            <div id="onboarding-teams"></div>
+            <div class="onboarding-controls">
+                <button id="btn-add-team" class="settings-btn"
+                    style="width: auto; padding: 0 20px; border-radius: 5px;">+ PŘIDAT TÝM</button>
+                <button id="btn-start-game" class="btn-clean-gold" style="margin-top: 20px;">POKRAČOVAT</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="starting-order-screen" style="display: none;">
+        <div id="starting-order-bg"></div>
+        <div class="starting-order-content">
+            <div class="starting-question-section">
+                <h2>ROZHODOVACÍ OTÁZKA</h2>
+                <div id="starting-question-box" class="question-box-mini">
+                    <div id="starting-q-text">Načítám otázku...</div>
+                    <div id="starting-a-text"
+                        style="display: none; color: var(--green); margin-top: 20px; font-weight: 900;"></div>
+                    <button id="btn-reveal-starting-a" class="btn-clean-gold" style="margin-top: 20px;">UKÁZAT
+                        ODPOVĚĎ</button>
+                </div>
+            </div>
+            <div class="starting-teams-section">
+                <h2>POŘADÍ TÝMŮ</h2>
+                <div id="starting-order-list"></div>
+                <button id="btn-finalize-start" class="btn-correct" style="margin-top: 30px; width: 100%;">ZAHÁJIT
+                    DOBÝVÁNÍ</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-container">
+        <div id="settings-bar">
+            <div id="logo-header" style="display: flex; align-items: center; gap: 15px;">
+                <img src="assets/img/logo.png" alt="Logo">
+                <span
+                    style="font-weight: 900; font-size: 1.25rem; color: var(--accent-gold); text-transform: uppercase; letter-spacing: 2px;">
+                    SOUBOJ O RUNETERRU
+                </span>
+                <span id="team-count-display" style="display: none;">0</span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <button class="settings-btn" id="btn-back-to-map"
+                    style="display: none; width: auto; padding: 0 15px; border-radius: 5px; font-size: 0.7rem; font-weight: 900;">ZPĚT
+                    NA MAPU</button>
+                <button class="settings-btn" id="btn-open-settings"
+                    style="display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; margin-left: 10px;">⚙️</button>
+            </div>
+        </div>
+
+        <audio id="snd-main-music" loop preload="none"></audio>
+        <audio id="snd-correct" src="assets/audio/correct.mp3" preload="none"></audio>
+        <audio id="snd-wrong" src="assets/audio/wrong.mp3" preload="none"></audio>
+        <audio id="snd-countdown" src="assets/audio/countdown.mp3" preload="none"></audio>
+        <audio id="snd-gold" src="assets/audio/gold.mp3" preload="none"></audio>
+        <audio id="snd-hover" src="assets/audio/button_hover.MP3" preload="none"></audio>
+
+        <div class="map-container" id="map-container">
+            <img id="runeterra-map" src="assets/img/runeterra_map.jpg" alt="Runeterra Map">
+            <!-- Markers will be injected here by MapManager/UIManager -->
+
+            <!-- Sliding Leaderboard Overlay -->
+            <div id="leaderboard-section" class="collapsed">
+                <div class="leaderboard-toggle" id="leaderboard-toggle">▶</div>
+                <div class="leaderboard-header">VLIV NA RUNETERRU</div>
+                <div id="leaderboard-content"></div>
+            </div>
+        </div>
+
+        <div id="team-section"></div>
+    </div>
+
+    <div id="settings-panel" class="settings-panel">
+        <div class="settings-content">
+            <div class="settings-header">
+                <h2>NASTAVENÍ</h2>
+                <button id="btn-close-settings" class="close-btn">&times;</button>
+            </div>
+            <div class="settings-body">
+                <div class="settings-section">
+                    <h3>HLAVNÍ</h3>
+                    <div class="volume-control master">
+                        <label>MASTER</label>
+                        <input type="range" id="vol-master" min="0" max="1" step="0.01" value="1">
+                        <span id="val-master">100%</span>
+                    </div>
+                    <button class="reset-btn" id="btn-reset-sidebar"
+                        style="width: 100%; margin-top: 15px; padding: 12px;">RESETOVAT HRU</button>
+                </div>
+
+                <div class="settings-section">
+                    <h3>GLOBÁLNÍ ZVUKY</h3>
+                    <div class="volume-control">
+                        <label>HUDBA MAPA</label>
+                        <input type="range" id="vol-bg" min="0" max="1" step="0.01" value="0.4">
+                        <span id="val-bg">40%</span>
+                    </div>
+                    <div class="volume-control">
+                        <label>MILIONÁŘ</label>
+                        <input type="range" id="vol-milionar" min="0" max="1" step="0.01" value="0.5">
+                        <span id="val-milionar">50%</span>
+                    </div>
+                    <div class="volume-control">
+                        <label>FEEDBACK</label>
+                        <input type="range" id="vol-feedback" min="0" max="1" step="0.01" value="0.6">
+                        <span id="val-feedback">60%</span>
+                    </div>
+                    <div class="volume-control">
+                        <label>TIMER</label>
+                        <input type="range" id="vol-countdown" min="0" max="1" step="0.01" value="0.5">
+                        <span id="val-countdown">50%</span>
+                    </div>
+                    <div class="volume-control">
+                        <label>EFEKTY</label>
+                        <input type="range" id="vol-sfx" min="0" max="1" step="0.01" value="0.4">
+                        <span id="val-sfx">40%</span>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>REGIONÁLNÍ HUDBA</h3>
+                    <div id="regional-volumes-list" style="display: flex; flex-direction: column; gap: 10px;">
+                        <div class="volume-control"><label>FRELJORD</label><input type="range" id="vol-reg-freljord"
+                                min="0" max="1" step="0.01" value="0.3"><span id="val-reg-freljord">30%</span></div>
+                        <div class="volume-control"><label>DEMACIA</label><input type="range" id="vol-reg-demacia"
+                                min="0" max="1" step="0.01" value="0.3"><span id="val-reg-demacia">30%</span></div>
+                        <div class="volume-control"><label>NOXUS</label><input type="range" id="vol-reg-noxus" min="0"
+                                max="1" step="0.01" value="0.3"><span id="val-reg-noxus">30%</span></div>
+                        <div class="volume-control"><label>IONIA</label><input type="range" id="vol-reg-ionia" min="0"
+                                max="1" step="0.01" value="0.3"><span id="val-reg-ionia">30%</span></div>
+                        <div class="volume-control"><label>SHURIMA</label><input type="range" id="vol-reg-shurima"
+                                min="0" max="1" step="0.01" value="0.3"><span id="val-reg-shurima">30%</span></div>
+                        <div class="volume-control"><label>BILGEWATER</label><input type="range" id="vol-reg-bilgewater"
+                                min="0" max="1" step="0.01" value="0.3"><span id="val-reg-bilgewater">30%</span></div>
+                        <div class="volume-control"><label>P&Z</label><input type="range" id="vol-reg-piltover_and_zaun"
+                                min="0" max="1" step="0.01" value="0.3"><span id="val-reg-piltover_and_zaun">30%</span>
+                        </div>
+                        <div class="volume-control"><label>SHADOW ISLES</label><input type="range"
+                                id="vol-reg-shadow_isles" min="0" max="1" step="0.01" value="0.3"><span
+                                id="val-reg-shadow_isles">30%</span></div>
+                        <div class="volume-control"><label>TARGON</label><input type="range" id="vol-reg-targon" min="0"
+                                max="1" step="0.01" value="0.3"><span id="val-reg-targon">30%</span></div>
+                        <div class="volume-control"><label>IXTAL</label><input type="range" id="vol-reg-ixtal" min="0"
+                                max="1" step="0.01" value="0.3"><span id="val-reg-ixtal">30%</span></div>
+                        <div class="volume-control"><label>THE VOID</label><input type="range" id="vol-reg-void" min="0"
+                                max="1" step="0.01" value="0.3"><span id="val-reg-void">30%</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal">
+        <div id="timer-container">
+            <svg id="timer-svg" width="100" height="100" viewBox="0 0 100 100">
+                <circle id="timer-circle-bg" cx="50" cy="50" r="45"></circle>
+                <circle id="timer-circle-prog" cx="50" cy="50" r="45" stroke-dasharray="283" stroke-dashoffset="0">
+                </circle>
+            </svg>
+            <div id="timer-display">35</div>
+        </div>
+        <div id="question-text">OTÁZKA</div>
+        <div id="answer-display">ODPOVĚĎ</div>
+
+        <div id="double-risk-buttons" style="display: none;">
+            <button class="btn-double" id="btn-double-yes">ANO (DOUBLE RISK)</button>
+            <button class="btn-double" id="btn-double-no">NE (STANDARD)</button>
+        </div>
+
+        <div id="judgment-buttons" style="display: none;">
+            <button class="btn-correct" id="btn-judge-correct">SPRÁVNĚ</button>
+            <button class="btn-wrong" id="btn-judge-wrong">ŠPATNĚ</button>
+        </div>
+    </div>
+
+    <div id="winner-screen">
+        <img src="assets/img/logo.png" style="width: 150px; margin-bottom: 30px;">
+        <h1>KONEC HRY!</h1>
+        <h2>VÍTĚZEM SE STÁVÁ</h2>
+        <h1 id="winner-name">TÝM XY</h1>
+        <div style="display: flex; gap: 20px; margin-top: 40px;">
+            <button class="btn-clean-gold" id="btn-review-map">PROHLÉDNOUT MAPU</button>
+            <button class="btn-correct" id="btn-restart">HRÁT ZNOVU</button>
+        </div>
+    </div>
+
+    <!-- Cinematic Region Splash Overlay -->
+    <div id="region-splash">
+        <div id="region-splash-bg"></div>
+        <video id="region-splash-video" loop muted playsinline></video>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script type="module" src="src/main.js?v=blacklisted-attack-v8"></script>
+</body>
+
+</html>

@@ -1,0 +1,373 @@
+[
+    {
+        "region": "onboarding",
+        "points": 0,
+        "category": "ROZHODOVACÍ",
+        "question": "Kolik je momentálně ve hře chroma skinů?",
+        "answer": "5146"
+    },
+    {
+        "region": "onboarding",
+        "points": 0,
+        "category": "ROZHODOVACÍ",
+        "question": "Kolik ve hře existuje šampionů s možností základního útoku na dálku?",
+        "answer": "83"
+    },
+    {
+        "region": "onboarding",
+        "points": 0,
+        "category": "ROZHODOVACÍ",
+        "question": "Kolik je ve hře dohromady skinů za 520RP, 750RP a 975RP?",
+        "answer": "581"
+    },
+    {
+        "region": "freljord",
+        "points": 100,
+        "category": "Game Knowledge",
+        "question": "Jaký je maximální možný level šampiona na topu v klasické hře na Summoners Rift?",
+        "answer": "20"
+    },
+    {
+        "region": "freljord",
+        "points": 200,
+        "category": "Hlášky",
+        "question": "Once a Bandle gunner, always a Bandle gunner!",
+        "answer": "Tristana"
+    },
+    {
+        "region": "freljord",
+        "points": 400,
+        "category": "Historie",
+        "question": "Jaké byly 3 možné podmínky pro získání Feats of Strenght?",
+        "answer": "First Blood, First Break, 3 Epické monstra"
+    },
+    {
+        "region": "freljord",
+        "points": 500,
+        "category": "Lore",
+        "question": "Jak se jmenoval Ryzeho mistr, kterého musel Ryze sám zabít poté, co podlehl korupci Runových válek a pokusil se použít World Runes?",
+        "answer": "Tyrus of the Twin Dawns"
+    },
+    {
+        "region": "freljord",
+        "points": 600,
+        "category": "Historie",
+        "question": "V kterém roce se poprvé objevila runa First Strike? (První úder)",
+        "answer": "2021"
+    },
+    {
+        "region": "freljord",
+        "points": 900,
+        "category": "Esport",
+        "question": "Který champion byl v roce 2015 na Worlds 100% buď banován nebo vybrán?",
+        "answer": "Gangplank"
+    },
+    {
+        "region": "demacia",
+        "points": 100,
+        "category": "Historie",
+        "question": "Jak se jmenuje mapa na 5v5?",
+        "answer": "Summoners Rift (Vyvolávačův žleb)"
+    },
+    {
+        "region": "demacia",
+        "points": 200,
+        "category": "Historie",
+        "question": "Který šampion je aktuálně nejnovější v League of Legends?",
+        "answer": "Zaahen"
+    },
+    {
+        "region": "demacia",
+        "points": 400,
+        "category": "Hlášky",
+        "question": "They shall tremble at my perfection.",
+        "answer": "Kayle"
+    },
+    {
+        "region": "demacia",
+        "points": 600,
+        "category": "Game Knowledge",
+        "question": "Který šampion jako jediný ve hře nemá žádný plošný útok?",
+        "answer": "Vayne"
+    },
+    {
+        "region": "demacia",
+        "points": 700,
+        "category": "Historie",
+        "question": "Kteří šampioni vyšli v roce 2022? (5)",
+        "answer": "Bel Veth, Ksante, Nilah, Renata Glasc, Zeri"
+    },
+    {
+        "region": "demacia",
+        "points": 900,
+        "category": "Historie",
+        "question": "Na jaké mapě se hrál game mód známý jako Ascension? (Vyzdvižení)",
+        "answer": "Crystal Scar"
+    },
+    {
+        "region": "noxus",
+        "points": 100,
+        "category": "Hlášky",
+        "question": "Have you seen my bear Tibbers?",
+        "answer": "Annie"
+    },
+    {
+        "region": "noxus",
+        "points": 300,
+        "category": "Game Knowledge",
+        "question": "Kolik výstřelů z věže přežije melee minion s plným zdravím na začátku hry, než ho lze bezpečně dorazit jedním základním útokem?",
+        "answer": "2"
+    },
+    {
+        "region": "noxus",
+        "points": 400,
+        "category": "Game Knowledge",
+        "question": "Co přesně dělá efekt Grievous Wounds? (Těžká zranění)",
+        "answer": "Snižuje léčení"
+    },
+    {
+        "region": "noxus",
+        "points": 700,
+        "category": "Hlášky",
+        "question": "Only fools pledge life to honor.",
+        "answer": "Talon"
+    },
+    {
+        "region": "noxus",
+        "points": 900,
+        "category": "Game Knowledge",
+        "question": "Jaké staty přesně dává item Moonstone Renewer? (Obnovitel měsíčního kamene)",
+        "answer": "25AP, 200HP, 20AH, 125% BMR"
+    },
+    {
+        "region": "shurima",
+        "points": 200,
+        "category": "Lore",
+        "question": "Jaký vztah mezi sebou mají Nasus a Renekton?",
+        "answer": "Bratři"
+    },
+    {
+        "region": "shurima",
+        "points": 300,
+        "category": "Hlášky",
+        "question": "Let's find some friends.",
+        "answer": "Amumu"
+    },
+    {
+        "region": "shurima",
+        "points": 600,
+        "category": "Lore",
+        "question": "Co zapříčinilo proměnu Cassiopei v hadí bytost?",
+        "answer": "Bodla Sivir, tím se aktivovala past a spustila se na ní starověká kletba"
+    },
+    {
+        "region": "shurima",
+        "points": 700,
+        "category": "Esport",
+        "question": "Jak se jmenuje hráč který drží rekord za nejrychlejší pentakill v historii lig LEC/LCS?",
+        "answer": "Hans Sama"
+    },
+    {
+        "region": "shurima",
+        "points": 800,
+        "category": "Esport",
+        "question": "Jaký Song byl vydaný k příležitosti Worlds v roce 2016?",
+        "answer": "Ignite"
+    },
+    {
+        "region": "ionia",
+        "points": 100,
+        "category": "Lore",
+        "question": "Který šampion je známý jako bratr Yasua?",
+        "answer": "Yone"
+    },
+    {
+        "region": "ionia",
+        "points": 200,
+        "category": "Esport",
+        "question": "Který korejský hráč, známý pod přezdívkou Unkillable Demon King vyhrál jako jediný v historii 6 titulů mistra světa?",
+        "answer": "Faker"
+    },
+    {
+        "region": "ionia",
+        "points": 400,
+        "category": "Esport",
+        "question": "Který tým vyhrál historicky první mistrovství světa? (Worlds)",
+        "answer": "Fnatic"
+    },
+    {
+        "region": "ionia",
+        "points": 500,
+        "category": "Game Knowledge",
+        "question": "Jaký je couldown na wardu na levelu 1 po položení?",
+        "answer": "210s"
+    },
+    {
+        "region": "ionia",
+        "points": 600,
+        "category": "Hlášky",
+        "question": "These blades were whetted on the bones of tyrants.",
+        "answer": "Irelia"
+    },
+    {
+        "region": "ionia",
+        "points": 900,
+        "category": "Hlášky",
+        "question": "No justice. No revenge. Only clarity.",
+        "answer": "Hwei"
+    },
+    {
+        "region": "bilgewater",
+        "points": 100,
+        "category": "Esport",
+        "question": "Jak se jmenuje společnost která vydala League of Legends?",
+        "answer": "Riot Games"
+    },
+    {
+        "region": "bilgewater",
+        "points": 300,
+        "category": "Historie",
+        "question": "Jak se jmenovalo monstrum které se v sezóně 2025 spawnovalo ve 20 minutě hry buď na horní nebo spodní straně řeky?",
+        "answer": "Atakhan"
+    },
+    {
+        "region": "bilgewater",
+        "points": 700,
+        "category": "Lore",
+        "question": "Jak se jmenuje loď šampiona Gangplanka, kterou nechala Miss Fortune vyhodit do povětří v Bilgewateru?",
+        "answer": "Dead Pool/Dead Daughter"
+    },
+    {
+        "region": "bilgewater",
+        "points": 1000,
+        "category": "Hlášky",
+        "question": "A real rat with a crossbow? Cant believe I owe my Dad money.",
+        "answer": "Zeri"
+    },
+    {
+        "region": "piltover_and_zaun",
+        "points": 200,
+        "category": "Game Knowledge",
+        "question": "V kolikáté minutě hry se na Summoners Rift poprvé oběví Baron Nashor?",
+        "answer": "20"
+    },
+    {
+        "region": "piltover_and_zaun",
+        "points": 300,
+        "category": "Esport",
+        "question": "Který evropský tým jako jediný v historii vyhrál mezinárodní turnaj MSI a zároveň se ve stejném roce dostal do finále Worlds (2019)?",
+        "answer": "G2"
+    },
+    {
+        "region": "piltover_and_zaun",
+        "points": 500,
+        "category": "Hlášky",
+        "question": "Lets get crackin.",
+        "answer": "Vi"
+    },
+    {
+        "region": "piltover_and_zaun",
+        "points": 700,
+        "category": "Game Knowledge",
+        "question": "Kolik itemů se staví z Serated Dirk? (zubatá dýka)",
+        "answer": "7"
+    },
+    {
+        "region": "piltover_and_zaun",
+        "points": 800,
+        "category": "Game Knowledge",
+        "question": "Jak se jmenuje W od Cammile?",
+        "answer": "Tactical Sweep (Taktické zametení)"
+    },
+    {
+        "region": "shadow_isles",
+        "points": 300,
+        "category": "Lore",
+        "question": "Který šampion je zodpovědný za zkázu požehnaných ostrovů a jejich proměnu v Shadow Isles?",
+        "answer": "Viego"
+    },
+    {
+        "region": "shadow_isles",
+        "points": 500,
+        "category": "Historie",
+        "question": "V kterém roce se změnily Gemstones na Mythic Essenci?",
+        "answer": "2022"
+    },
+    {
+        "region": "shadow_isles",
+        "points": 800,
+        "category": "Hlášky",
+        "question": "They trample life! I will trample them!",
+        "answer": "Maokai"
+    },
+    {
+        "region": "shadow_isles",
+        "points": 1000,
+        "category": "Game Knowledge",
+        "question": "Jak se přesně jmenují 3 startovací jungle itemy?",
+        "answer": "Scorchclaw Pup, Gustwalker Hatchling, Mosstomper Seedling"
+    },
+    {
+        "region": "targon",
+        "points": 500,
+        "category": "Esport",
+        "question": "Které týmy se proti sobě utkaly ve finále LEC 2026 Versus?",
+        "answer": "G2 Vs KC"
+    },
+    {
+        "region": "targon",
+        "points": 800,
+        "category": "Historie",
+        "question": "V kterém roce se poprvé objevil Your Shop?",
+        "answer": "2016"
+    },
+    {
+        "region": "targon",
+        "points": 1000,
+        "category": "Lore",
+        "question": "Jak se jmenuje první drak (podle spekulací), kterého Aurelion Sol vytvořil a který byl součástí jeho souhvězdí?",
+        "answer": "Inviolus Vox"
+    },
+    {
+        "region": "ixtal",
+        "points": 400,
+        "category": "Lore",
+        "question": "Jak se jmenuje hlavní město Ixtalu?",
+        "answer": "Ixaocan"
+    },
+    {
+        "region": "ixtal",
+        "points": 800,
+        "category": "Lore",
+        "question": "Jak se jmenovala zbraň Ixtalu použitá proti Voidu?",
+        "answer": "Monolith"
+    },
+    {
+        "region": "ixtal",
+        "points": 1000,
+        "category": "Historie",
+        "question": "Jak se jmenoval item který dokázal na velmi krátkou dobu deaktivovat věž?",
+        "answer": "Ohmwrecker"
+    },
+    {
+        "region": "void",
+        "points": 600,
+        "category": "Esport",
+        "question": "Kdo je aktuálně junglerem teamu Shifters?",
+        "answer": "Boukada"
+    },
+    {
+        "region": "void",
+        "points": 900,
+        "category": "Lore",
+        "question": "Podle legendy existuje deset Prvotních démonů. Jak se jmenuje démon radosti, který je v lore uvězněn v sedmihlavém monstru a jehož moc využívá Nilah?",
+        "answer": "Ashlesh"
+    },
+    {
+        "region": "void",
+        "points": 1000,
+        "category": "Esport",
+        "question": "Čínský tým Invictus Gaming v roce 2018 vyhrál historicky první titul pro region LPL, vyjmenuj jeho tehdejší roster",
+        "answer": "The Shy, Ning, Rookie, JackeyLove, Baolan"
+    }
+]
